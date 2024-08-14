@@ -50,6 +50,8 @@ async function AlertBoxCheckController(req, res){
             select: {
                 id: true,
                 alert_time: true,
+                meal: true,
+                alert_slot: true
             }
         });
 
@@ -84,7 +86,9 @@ async function AlertBoxCheckController(req, res){
                 id: timeData.id,
                 alert_time: makeLikeISOStringFormatInUTC7,
                 alert_timestamp_utc: moment(makeLikeISOStringFormatInUTC7).valueOf(),
-                utc: makeLikeISOStringFormatInUTC7.match(/([+-]\d{2}:\d{2})$/)[0]
+                utc: makeLikeISOStringFormatInUTC7.match(/([+-]\d{2}:\d{2})$/)[0],
+                meal: timeData.meal,
+                alert_slot: timeData.alert_slot
             }
         });
         // // ทำการ Filter เอาเฉพาะวันที่ Client กำลังทำงานเท่านั้น
