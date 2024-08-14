@@ -27,7 +27,8 @@ module.exports = {
         );
 
         // Convert to ISO string
-        const isoString = new Date(date.getTime()).toISOString();
+        // const isoString = date.toISOString(); 
+        const isoString = new Date(date.getTime() + ((-7 * 60) * 60000))// make it to UTC for production
         return isoString;
     }
 };
