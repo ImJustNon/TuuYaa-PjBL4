@@ -24,7 +24,7 @@ datasource db {
 //     user_email              String      @unique                 //
 //     user_password_hash      String      @db.VarChar(255)        //
 //     create_at               DateTime    @default(now())
-// 	update_at               DateTime    @updatedAt
+// 	   update_at               DateTime    @updatedAt
 //     is_google               Boolean     @default(false)
 //     user_google_id          String?
 //     user_role               String      @default("user")

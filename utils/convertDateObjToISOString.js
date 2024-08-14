@@ -27,7 +27,7 @@ module.exports = {
         );
 
         // Convert to ISO string
-        const isoString = date.toUTCString();
+        const isoString = new Date(date.toUTCString()).toISOString();
         return isoString;
     }
 };
