@@ -22,4 +22,5 @@ module.exports = {
         "http://it-project.site",
         "https://it-project.site"
     ],
+    mode: process.env.MODE,
 }

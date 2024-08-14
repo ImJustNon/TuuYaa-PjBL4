@@ -1,3 +1,5 @@
+const config = require("../config/config");
+
 module.exports = {
     convertDateObjToISOString: (dateObj) => {
         const alertTime = {
@@ -27,8 +29,14 @@ module.exports = {
         );
 
         // Convert to ISO string
-        // const isoString = date.toISOString(); 
-        const isoString = new Date(date.getTime() + ((-7 * 60) * 60000))// make it to UTC for production
+        let isoString = "";
+        if(config.mode === "DEV"){
+            isoString = date.toISOString();  // this is for dev mode
+        }
+        else if(config.mode === "PROD") {
+            isoString = new Date(date.getTime() + ((-7 * 60) * 60000))// make it to UTC for production
+        }
+        
         return isoString;
     }
 };
