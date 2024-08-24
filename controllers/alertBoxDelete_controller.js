@@ -46,7 +46,7 @@ async function AlertBoxDeleteController(req, res){
          //  Validate Alert Data
         const findAlertData = await prisma.alertData.findUnique({
             where: {
-                id: alertId,
+                id: parseInt(alertId),
                 box_uuid: findBoxData.box_uuid,
             },
             select: {
