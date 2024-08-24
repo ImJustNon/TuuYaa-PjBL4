@@ -7,6 +7,7 @@ const { AlertInfoController } = require("../controllers/alertInfo_controller");
 const { AlertRemoveController } = require("../controllers/alertRemove_controller");
 const { AlertUpdateController } = require("../controllers/alertUpdate_controller");
 const { AlertBoxCheckController } = require("../controllers/alertBoxCheck_controller");
+const { AlertBoxDeleteController } = require("../controllers/alertBoxDelete_controller");
 const urlEncoded = bodyparser.urlencoded({
     limit: "50mb",
     extended: false,
@@ -19,5 +20,6 @@ router.post("/v1/alert/info", urlEncoded, AlertInfoController);
 router.post("/v1/alert/remove", urlEncoded, AlertRemoveController);
 router.post("/v1/alert/update", urlEncoded, AlertUpdateController);
 router.post("/v1/box/alert/check", urlEncoded, AlertBoxCheckController);
+router.post("/v1/box/alert/delete", urlEncoded, AlertBoxDeleteController);
 
 module.exports = router;
