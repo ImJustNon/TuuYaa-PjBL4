@@ -11,17 +11,19 @@ const momentTz = require("moment-timezone");
 
 
 async function AlertBoxDeleteController(req, res){
-    const { alertUUID, boxKey } = req.body ?? {};
+    const { alertId, boxKey } = req.body ?? {};
 
-    if(!alertUUID || !boxKey){
+    if(!alertId || !boxKey){
         return res.json({
             status: "FAIL",
-            message: "Missing data fields alertUUID or boxKey or both",
+            message: "Missing data fields alertId or boxKey or both",
             error: {}
         });
     }
 
     try {
+
+        //  Validate Box
         const findBoxData = await prisma.box.findUnique({
             where: {
                 box_key: boxKey,
@@ -41,12 +43,15 @@ async function AlertBoxDeleteController(req, res){
             });
         }
 
+         //  Validate Alert Data
         const findAlertData = await prisma.alertData.findUnique({
             where: {
-                alert_uuid: alertUUID,
+                id: alertId,
+                box_uuid: findBoxData.box_uuid,
             },
             select: {
                 alert_uuid: true,
+                box_uuid: true
             }
         });
 
@@ -58,15 +63,20 @@ async function AlertBoxDeleteController(req, res){
             });
         }
 
-        await prisma.alertData.delete({
+        //  Update Alert Data
+        await prisma.alertData.update({
             where: {
                 alert_uuid: findAlertData.alert_uuid,
+                box_uuid: findAlertData.box_uuid
+            },
+            data: {
+                is_disabled: true
             }
         }); 
 
         return res.json({
             status: "OK",
-            message: `Delete Alert UUID : ${findAlertData.alert_uuid} Success`,
+            message: `Update to disable mode : Success : Alert UUID : ${findAlertData.alert_uuid}`,
             error: false
         }); 
     }

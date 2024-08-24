@@ -46,7 +46,7 @@ async function AlertRemoveController(req, res){
             });
         }
 
-        const findAlertInfo = await prisma.alertData.update({
+        await prisma.alertData.update({
             where: {
                 alert_uuid: alertUUID,
                 box_uuid: boxUUID,
