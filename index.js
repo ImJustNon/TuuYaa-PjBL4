@@ -22,12 +22,15 @@ const jsonEncoded = express.json({
     limit: "50mb",
 });
 const limiter = rateLimit({
-    windowMs: 30 * 60 * 1000, 
+    windowMs: 5 * 60 * 1000, 
     max: 100,
-    handler: (req, res) => {
+    handler: (req, res, next, options) => {
+        const retryAfter = Math.ceil(options.windowMs / 1000);
         res.status(429).json({
             status: "FAIL",
-            message: "Too many requests, please try again later."
+            message: "Too many requests, please try again later.",
+            retryAfter: retryAfter,
+            resetTime: new Date(Date.now() + retryAfter * 1000).toISOString(),
         });
     }
 });
