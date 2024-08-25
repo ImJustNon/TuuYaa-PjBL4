@@ -67,6 +67,7 @@ async function BoxInfoController(req, res){
                 id: true,
                 box_name: true,
                 box_uuid: true,
+                line_notify_token: true,
                 create_at: true,
                 update_at: true,
             }

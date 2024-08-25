@@ -8,6 +8,7 @@ const { verifyJwt } = require("../utils/verifyJwt");
 const { convertDateObjToISOString } = require("../utils/convertDateObjToISOString");
 const moment = require("moment");
 const momentTz = require("moment-timezone");
+const { sendLineAfterOpenBox } = require("../utils/sendLine");
 
 
 async function AlertBoxDeleteController(req, res){
@@ -49,10 +50,6 @@ async function AlertBoxDeleteController(req, res){
                 id: parseInt(alertId),
                 box_uuid: findBoxData.box_uuid,
             },
-            select: {
-                alert_uuid: true,
-                box_uuid: true
-            }
         });
 
         if(!findAlertData){
@@ -73,6 +70,18 @@ async function AlertBoxDeleteController(req, res){
                 is_disabled: true
             }
         }); 
+
+        // Get LINE Notify Token
+        const findRegisterdDataBox = await prisma.registeredBox.findUnique({
+            where: {
+                box_uuid: findBoxData.box_uuid,
+            }
+        });
+
+        if(findRegisterdDataBox.line_notify_token){
+            await sendLineAfterOpenBox(findRegisterdDataBox.line_notify_token, findAlertData.alert_name, findAlertData.meal, findAlertData.alert_time, findAlertData.alert_time, findAlertData.alert_slot);
+        }
+
 
         return res.json({
             status: "OK",

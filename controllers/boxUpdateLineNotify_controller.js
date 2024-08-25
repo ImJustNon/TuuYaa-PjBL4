@@ -61,7 +61,7 @@ async function BoxUpdateLineNotifyController(req, res){
         const findBoxInfo = await prisma.registeredBox.findUnique({
             where: {
                 box_uuid: boxUUID,
-                user_uuid: getUserData.user_uuid,
+                user_uuid: findUserData.user_uuid,
             },
             select: {
                 id: true,
@@ -95,7 +95,12 @@ async function BoxUpdateLineNotifyController(req, res){
         });
     }
     catch(e){
-        
+        console.log(e);
+        return res.json({
+            status: "FAIL",
+            message: "Internal Server Error",
+            error: e
+        });
     }
 
 }

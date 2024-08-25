@@ -83,7 +83,8 @@ async function BoxTodayAlertController(req, res){
         const findAlertData = await prisma.alertData.findMany({
             where: {
                 box_uuid: findBoxInfo.box_uuid,
-                user_uuid: getUserData.user_uuid
+                user_uuid: getUserData.user_uuid,
+                is_disabled: false
             },
             select: {
                 id: true,
