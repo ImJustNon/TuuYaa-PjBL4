@@ -9,8 +9,8 @@ const { convertDateObjToISOString } = require("../utils/convertDateObjToISOStrin
 const { isValidDate } = require("../utils/isValidDate");
 const moment = require("moment");
 
-async function BoxUpdateLineNotifyController(req, res){
-    const { lineToken, boxUUID } = req.body ?? {};
+async function BoxDeactivateLineNotifyController(req, res){
+    const { boxUUID } = req.body ?? {};
     const { token } = req.cookies ?? {};
 
     if(!token){
@@ -21,10 +21,10 @@ async function BoxUpdateLineNotifyController(req, res){
         });  
     }
 
-    if(!lineToken || !boxUUID){
+    if(!boxUUID){
         return res.json({
             status: "FAIL",
-            message:  "Missing fields lineToken or boxUUID"
+            message: "Missing field boxUUID"
         });
     }
 
@@ -77,32 +77,22 @@ async function BoxUpdateLineNotifyController(req, res){
             });
         }
 
-        // Test API Line Notify Token
-        const lineNotifyResponse = await axios.post("https://notify-api.line.me/api/notify", `message=This is just a test message, you can ignore this.`, {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `Bearer ${lineToken}`,
+        // Update Line notify
+        await prisma.registeredBox.update({
+            where: {
+                user_uuid: findUserData.user_uuid,
+                box_uuid: findBoxInfo.box_uuid,
             },
+            data: {
+                line_notify_token: null,
+            }
         });
 
-        if(lineNotifyResponse.data.status === 200){
-            // Update Line notify
-            await prisma.registeredBox.update({
-                where: {
-                    user_uuid: findUserData.user_uuid,
-                    box_uuid: findBoxInfo.box_uuid,
-                },
-                data: {
-                    line_notify_token: lineToken,
-                }
-            });
-
-            return res.json({
-                status: "OK",
-                message: "Update line notify token success",
-                error: {}
-            });
-        }
+        return res.json({
+            status: "OK",
+            message: "Deactivated Line Notify Success",
+            error: {}
+        });
     }
     catch(e){
         console.log(e);
@@ -116,5 +106,5 @@ async function BoxUpdateLineNotifyController(req, res){
 }
 
 module.exports = {
-    BoxUpdateLineNotifyController
+    BoxDeactivateLineNotifyController
 }

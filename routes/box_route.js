@@ -9,6 +9,7 @@ const { BoxDeepInfoController } = require("../controllers/boxDeepInfo_controller
 const { BoxDeleteController } = require("../controllers/boxDelete_controller");
 const { BoxRenameController } = require("../controllers/boxRename_controller");
 const { BoxUpdateLineNotifyController } = require("../controllers/boxUpdateLineNotify_controller");
+const { BoxDeactivateLineNotifyController } = require("../controllers/boxDeactivateLineNotify_controller");
 const urlEncoded = bodyparser.urlencoded({
     limit: "50mb",
     extended: false,
@@ -23,6 +24,7 @@ router.post("/v1/box/deepinfo", urlEncoded, BoxDeepInfoController);
 router.post("/v1/box/delete", urlEncoded, BoxDeleteController);
 router.post("/v1/box/rename", urlEncoded, BoxRenameController);
 router.post("/v1/box/updatelinenotify", urlEncoded, BoxUpdateLineNotifyController);
+router.post("/v1/box/deactivatelinenotify", urlEncoded, BoxDeactivateLineNotifyController);
 
 
 module.exports = router;

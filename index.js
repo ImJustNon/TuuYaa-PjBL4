@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const http = require("http");
 const config = require("./config/config");
 const cookieParser = require("cookie-parser");
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const server = http.createServer(app);
@@ -20,7 +21,16 @@ const urlEncoded = bodyparser.urlencoded({
 const jsonEncoded = express.json({
     limit: "50mb",
 });
-
+const limiter = rateLimit({
+    windowMs: 30 * 60 * 1000, 
+    max: 100,
+    handler: (req, res) => {
+        res.status(429).json({
+            status: "FAIL",
+            message: "Too many requests, please try again later."
+        });
+    }
+});
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
@@ -36,6 +46,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan("dev"));
+app.use(limiter);
 app.use(urlEncoded);
 app.use(jsonEncoded);
 
