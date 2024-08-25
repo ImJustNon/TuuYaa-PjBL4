@@ -70,13 +70,14 @@ model Box {
 }
 
 model RegisteredBox {
-    id          Int         @id @default(autoincrement())
-    box_uuid    String      @unique                             // box uuid
-    box_name    String                                          //
-    user_uuid   String                                          // 
-    create_at   DateTime    @default(now())
-	update_at   DateTime    @updatedAt
-    is_disabled Boolean     @default(false)
+    id                  Int         @id @default(autoincrement())
+    box_uuid            String      @unique                             // box uuid
+    box_name            String                                          //
+    user_uuid           String                
+    line_notify_token   String?                                          // 
+    create_at           DateTime    @default(now())
+	update_at           DateTime    @updatedAt
+    is_disabled         Boolean     @default(false)
 }
 
 model AlertData {

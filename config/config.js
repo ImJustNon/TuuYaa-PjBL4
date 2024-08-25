@@ -23,4 +23,5 @@ module.exports = {
         "https://it-project.site"
     ],
     mode: process.env.MODE,
+    lineNotifyToken: process.env.LINE_NOTIFY_TOKEN
 }
