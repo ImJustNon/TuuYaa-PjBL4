@@ -19,7 +19,7 @@ const int relay_3 = 25;
 const int relay_4 = 26;
 const int relay_5 = 27;
 const int relay_6 = 14;
-const int relay_7 = 12;
+const int relay_7 = 13;
 
 const int relay_A = 18;
 const int relay_B = 5;
@@ -27,9 +27,9 @@ const int relay_C = 17;
 const int relay_D = 16;
 
 // ตั้งค่า
-const String boxKey = "nonlnwza";
-const String postCheckTime = "http://192.168.74.52:8899/api/alert/gettoday";
-const String postRemoveTime = "http://192.168.74.52:8899/api/alert/remove";
+const String boxKey = "nonlnwza"; //http://nonandchain.thddns.net:4843/
+const String postCheckTime = "http://nonandchain.thddns.net:4843/api/alert/gettoday"; //45.141.26.127
+const String postRemoveTime = "http://nonandchain.thddns.net:4843/api/alert/delete"; //45.141.26.127
 // stupid var
 unsigned long lastTime = 0;
 unsigned long timerDelay = 1000;
@@ -62,7 +62,7 @@ void setup() {
   WiFiManager wifiManager;
   lcd.setCursor(0, 0); lcd.print("SSID : ESP32_AP");
   lcd.setCursor(0, 1); lcd.print("IP : 192.168.4.1");
-  if (!wifiManager.autoConnect("ESP32_AP")) {
+  if (!wifiManager.autoConnect("ESP32_AccessPoint")) {
     Serial.println("Failed to connect and hit timeout");
     lcd.setCursor(0, 0); lcd.print("WiFi : FAIL     ");
     lcd.setCursor(0, 1); lcd.print(" Restarting.... ");
@@ -170,6 +170,7 @@ void checkAlertTime(){
             }
             delay(1 * 60 * 60 * 1000); //3600000 // 1hr
           }
+          removeAlertTime();
           break;
         }
         else {
@@ -179,11 +180,12 @@ void checkAlertTime(){
           startAlert = true;
           alertDataId = String(selectedAlertIdData);
           StartAlertSound();
+          removeAlertTime();
           break;
         }
       }
     }
-    removeAlertTime();
+    // removeAlertTime();
   }
 }
 
