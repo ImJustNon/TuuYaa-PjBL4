@@ -7,7 +7,7 @@
 
 <br />
 <img align="center" src="./docs/assets/all-institute.png" />
-<br /><br />
+<br />
 
 <h1 align="center">Alerting Medicine Cabinet by Using IoT and Web Application</h1>
 <h3 align="center">ตู้ยาเเจ้งเตือนด้วยเทคโนโลยีไอโอที</h3>
