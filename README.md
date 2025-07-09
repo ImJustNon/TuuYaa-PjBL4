@@ -5,6 +5,9 @@
     <img width="150px" src="./docs/assets/sbtvc_logo.png" />
 </div>
 
+<br />
+<img align="center" src="./docs/assets/all-institute.png" />
+<br /><br />
 
 <h1 align="center">Alerting Medicine Cabinet by Using IoT and Web Application</h1>
 <h3 align="center">ตู้ยาเเจ้งเตือนด้วยเทคโนโลยีไอโอที</h3>
@@ -135,6 +138,12 @@
 
 <h2>⛔ Warning ⛔</h2>
 <p>จำไม่ได้ล่ะ เเต่ล่ะอย่าง เเต่ที่รู้ๆ คือบัคเยอะมากกกกกๆ เเบบมากกกกกอ่ะ โค้ดก็โคตรเน่าเเต่ละตัว คือตอนนั้นเหลือเวลาเดือนนึงมั้งกับอีกครึ่งก็เลยบัคไหนมันหลบๆ ได้ก็ไม่ได้เเก้ 55555 API บางเส้นก็ยังทำไม่เสร็จเลยด้วยซ้ำ 55555 อย่าว่าเเต่ API เลย Frontend บางหน้าเเม่งยังโล่งๆ อยู่เลยด้วยซ้ำ LMAO ┏ (゜ω゜)=👍 </p>
-<hr />
 
+
+<h2>Presentation</h2>
+<a href="https://www.canva.com/design/DAGOih-OMlk/Iim0tcMWnl6m0vH6AOjpBg/edit?utm_content=DAGOih-OMlk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">
+    <img align="center" src="./docs/assets/banner.jpg" />
+</a>
+
+<hr />
 <h3 align="center">Made with 💗 by The Greatest Developer That's Ever Live </h3>
